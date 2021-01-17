@@ -381,7 +381,7 @@ class Downloader(object):
     )
     RPM_ORG_ARCHIVE_TOP_DIR_NAME_FORMAT = 'rpm-{version}'
     # github
-    RPM_GIT_HUB_BASE_URL = 'https://github.com/rpm-software-management/rpm'
+    RPM_GIT_HUB_BASE_URL = 'https://github.com/testing-farm/rpm'
     RPM_GIT_HUB_REPO_URL = '{0}.git'.format(RPM_GIT_HUB_BASE_URL)
     RPM_GIT_HUB_ARCHIVE_URL_FORMAT = (
         RPM_GIT_HUB_BASE_URL + '/archive/{tag_name}.tar.gz'
@@ -497,7 +497,7 @@ class Downloader(object):
         return 'rpm'
 
     def _predict_candidate_git_tag_names(self):
-        version = self.rpm_py_version.version
+        version = '{}-python2'.format(self.rpm_py_version.version)
         name_release = 'rpm-{0}-release'.format(version)
         name_non_release = 'rpm-{0}'.format(version)
         tag_names = None
@@ -1296,13 +1296,6 @@ class Linux(object):
         """Verify system status."""
         if not sys.platform.startswith('linux'):
             raise InstallError('Supported platform is Linux only.')
-
-        """RPM 4.16.0 dropped the Python 2 compatibility.
-        https://github.com/rpm-software-management/rpm/commit/aa71073
-        """
-        if self.rpm.version_info >= (4, 16) and sys.version_info < (3, 0):
-            message = 'RPM version >= 4.16 does not support Python 2.'
-            raise InstallError(message)
 
         if self.python.is_system_python():
             if self.python.is_python_binding_installed():

@@ -90,17 +90,22 @@ class BdistWheelCommand(Command):
 
 
 setuptools.setup(
-    name='rpm-py-installer',
+    name='rpm-py-installer-python2',
     version=VERSION,
     license='MIT',
     description='RPM Python binding Installer',
     long_description='''
 An installer to enable the RPM Python binding in any environment.
 See "Homepage" on GitHub for detail.
+
+This version contains backports from original package to support
+python2 on rpm-4.16.
+
+Should not be used by anybody else as the author and his team.
 ''',
-    author='Jun Aruga',
-    author_email='jaruga@redhat.com',
-    url='https://github.com/junaruga/rpm-py-installer',
+    author='Miroslav Vadkerti',
+    author_email='mvadkert@redhat.com',
+    url='https://github.com/testing-farm/rpm-py-installer',
     packages=[
         'rpm_py_installer',
     ],
